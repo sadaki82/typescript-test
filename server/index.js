@@ -1,6 +1,23 @@
 const PORT = process.env.PORT || 8000;
-const { setupServer } = require("./server");
-const app = setupServer();
+// const { setupServer } = require("./server");
+// const app = setupServer();
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+app.use(bodyParser.json()); // application/json
+require("dotenv").config();
+
+const mongoose = require("mongoose");
+const foodRouter = require("../routes/routes");
+
+app.use(foodRouter);
+
+mongoose
+  .connect(
+    "mongodb+srv://spark3xxx:p2lduhsq@cluster0.2sawy.mongodb.net/food?retryWrites=true&w=majority"
+  )
+  .then(() => console.log("データ接続成功"))
+  .catch((err) => console.log(err));
 
 // const cors = require("cors");
 // app.use(
