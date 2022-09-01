@@ -10,7 +10,9 @@ const foodRouter = require("../routes/routes");
 app.use(foodRouter);
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(
+    "mongodb+srv://spark3xxx:p2lduhsq@cluster0.2sawy.mongodb.net/food?retryWrites=true&w=majority"
+  )
   .then(() => console.log("データ接続成功"))
   .catch((err) => console.log(err));
 
