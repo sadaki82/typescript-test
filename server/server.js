@@ -10,7 +10,7 @@ const foodRouter = require("../routes/routes");
 app.use(foodRouter);
 
 mongoose
-  .connect("process.env.MONGO_URI")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("データ接続成功"))
   .catch((err) => console.log(err));
 
