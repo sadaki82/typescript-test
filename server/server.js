@@ -17,10 +17,10 @@ mongoose
   .catch((err) => console.log(err));
 
 const setupServer = () => {
-  // app.use("/", (req, res) => {
-  //   res.send("hello");
-  // });
-  app.use(foodRouter);
+  app.use("/", (req, res) => {
+    res.send("hello");
+  });
+  // app.use(foodRouter);
 
   return app;
 };
