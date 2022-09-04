@@ -3,7 +3,6 @@ import express, { Request, Response } from "express";
 
 exports.getFoods = async (req: Request, res: Response) => {
   const foods = await foodModel.find({});
-  console.log(foods);
 
   try {
     res.send(foods);
@@ -25,6 +24,7 @@ exports.getFood = async (req: Request, res: Response) => {
 
 exports.postFood = async (req: Request, res: Response) => {
   const food = new foodModel(req.body);
+  console.log(food);
 
   try {
     await food.save();

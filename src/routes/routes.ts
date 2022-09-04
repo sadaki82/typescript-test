@@ -1,7 +1,5 @@
 import express from "express";
 const app = express();
-// app.use(express.json());
-
 const foodController = require("../controllers/food");
 
 app.get("/api/foods", foodController.getFoods);
