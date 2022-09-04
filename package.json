@@ -9,8 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./server/index.ts",
-    "start": "node ./server/index.js"
+    "dev": "nodemon ./server/index.ts"
   },
   "keywords": [],
   "author": "",
