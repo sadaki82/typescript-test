@@ -1,10 +1,10 @@
 const PORT = process.env.PORT || 8000;
-import express, { Request, Response } from "express";
-
+import express from "express";
 const app = express();
-const bodyParser = require("body-parser");
-app.use(bodyParser.json()); // application/json
 require("dotenv").config();
+
+// const bodyParser = require("body-parser");
+// app.use(bodyParser.json()); // application/json
 
 const mongoose = require("mongoose");
 const foodRouter = require("../routes/routes");
