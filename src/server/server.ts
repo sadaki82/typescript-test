@@ -1,6 +1,5 @@
-import express, { Request, Response } from "express";
+import express from "express";
 const foodRouter = require("../routes/routes");
-
 const app = express();
 
 app.use(foodRouter);

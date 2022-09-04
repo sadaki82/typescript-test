@@ -3,9 +3,6 @@ import express from "express";
 const app = express();
 require("dotenv").config();
 
-// const bodyParser = require("body-parser");
-// app.use(bodyParser.json()); // application/json
-
 const mongoose = require("mongoose");
 const foodRouter = require("../routes/routes");
 

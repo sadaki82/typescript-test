@@ -1,6 +1,6 @@
-import express, { Request, Response } from "express";
+import express from "express";
 const app = express();
-app.use(express.json());
+// app.use(express.json());
 
 const foodController = require("../controllers/food");
 
