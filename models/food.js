@@ -16,6 +16,7 @@ const FoodSchema = new mongoose.Schema({
   description: String,
   img: String,
   imgfilename: String,
+  cards: { user_cards: Array, user_favarite: Array },
   // calories: {
   //   type: Number,
   //   default: 0,
