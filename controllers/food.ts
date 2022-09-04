@@ -1,6 +1,7 @@
 const foodModel = require("../models/food");
+import express, { Request, Response } from "express";
 
-exports.getFoods = async (req, res) => {
+exports.getFoods = async (req: Request, res: Response) => {
   const foods = await foodModel.find({});
   console.log(foods);
 
@@ -11,7 +12,7 @@ exports.getFoods = async (req, res) => {
   }
 };
 
-exports.getFood = async (req, res) => {
+exports.getFood = async (req: Request, res: Response) => {
   const { idOrName } = req.params;
   const food = await foodModel.find({ _id: idOrName });
 
@@ -22,7 +23,7 @@ exports.getFood = async (req, res) => {
   }
 };
 
-exports.postFood = async (req, res) => {
+exports.postFood = async (req: Request, res: Response) => {
   const food = new foodModel(req.body);
 
   try {
@@ -34,7 +35,7 @@ exports.postFood = async (req, res) => {
   }
 };
 
-exports.patchFood = async (req, res) => {
+exports.patchFood = async (req: Request, res: Response) => {
   //constをtryの外に出したら動いた
   const { idOrName } = req.params;
   try {
@@ -77,7 +78,7 @@ exports.patchFood = async (req, res) => {
   }
 };
 
-exports.deleteFood = async (req, res) => {
+exports.deleteFood = async (req: Request, res: Response) => {
   const { idOrName } = req.params;
   try {
     await foodModel.remove({ _id: idOrName });
