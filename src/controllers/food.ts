@@ -28,7 +28,10 @@ exports.postFood = async (req: Request, res: Response) => {
   let { name } = req.body;
   console.log(name);
 
-  const food = new foodModel(req.body);
+  const food = new foodModel({
+    _id: new mongoose.Types.ObjectId(),
+    name,
+  });
 
   try {
     await food.save();

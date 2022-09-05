@@ -1,11 +1,12 @@
 const PORT = process.env.PORT || 8000;
 import express from "express";
 const app = express();
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()); // application/json
+
 const cors = require("cors");
 require("dotenv").config();
-
 app.use(cors());
 
 const mongoose = require("mongoose");
