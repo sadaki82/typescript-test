@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface IFood extends Document {
-  name: string;
-}
+// export interface IFood extends Document {
+//   name: string;
+// }
 
 const FoodSchema: Schema = new mongoose.Schema({
   name: String,
@@ -23,9 +23,9 @@ const FoodSchema: Schema = new mongoose.Schema({
 
 // module.exports = Food;
 
-const Food = mongoose.model<IFood>("Food", FoodSchema);
+// const Food = mongoose.model<IFood>("Food", FoodSchema);
 
-module.exports = Food;
+// module.exports = Food;
 
 // const mongoose = require("mongoose");
 
@@ -55,6 +55,6 @@ module.exports = Food;
 //   // },
 // });
 
-// const Food = mongoose.model("Food", FoodSchema);
+const Food = mongoose.model("Food", FoodSchema);
 
-// module.exports = Food;
+module.exports = Food;
