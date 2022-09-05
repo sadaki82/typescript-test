@@ -1,5 +1,6 @@
 const foodModel = require("../models/food");
 import express, { Request, Response } from "express";
+import mongoose from "mongoose";
 
 exports.getFoods = async (req: Request, res: Response) => {
   const foods = await foodModel.find({});
@@ -12,6 +13,7 @@ exports.getFoods = async (req: Request, res: Response) => {
 };
 
 exports.getFood = async (req: Request, res: Response) => {
+  console.log(req.params);
   const { idOrName } = req.params;
   const food = await foodModel.find({ _id: idOrName });
 
@@ -23,8 +25,10 @@ exports.getFood = async (req: Request, res: Response) => {
 };
 
 exports.postFood = async (req: Request, res: Response) => {
+  let { name } = req.body;
+  console.log(name);
+
   const food = new foodModel(req.body);
-  console.log(food);
 
   try {
     await food.save();
@@ -36,6 +40,8 @@ exports.postFood = async (req: Request, res: Response) => {
 };
 
 exports.patchFood = async (req: Request, res: Response) => {
+  console.log(req.params);
+  console.log(req);
   //constをtryの外に出したら動いた
   const { idOrName } = req.params;
   try {
