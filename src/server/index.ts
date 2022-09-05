@@ -6,6 +6,8 @@ app.use(bodyParser.json()); // application/json
 const cors = require("cors");
 require("dotenv").config();
 
+app.use(cors());
+
 const mongoose = require("mongoose");
 const foodRouter = require("../routes/routes");
 
