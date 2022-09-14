@@ -7,6 +7,7 @@ const flashcardController = require("../controllers/flashcard");
 app.get("/api/users", userController.getUsers);
 app.get("/api/users/:id", userController.getUser);
 app.post("/api/users", userController.postUser);
+app.patch("/api/users/:id", userController.patchUser);
 app.delete("/api/users/:id", userController.deleteUser);
 
 app.get("/api/flashcards", flashcardController.getFlashcards);

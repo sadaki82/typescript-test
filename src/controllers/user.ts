@@ -25,7 +25,7 @@ exports.getUser = async (req: Request, res: Response) => {
 
 exports.postUser = async (req: Request, res: Response) => {
   const user = await new userModel(req.body);
-  console.log(user);
+
   try {
     await user.save();
     res.send(user);
@@ -35,50 +35,40 @@ exports.postUser = async (req: Request, res: Response) => {
   }
 };
 
-// exports.patchUser = async (req: Request, res: Response) => {
-//   console.log(req.params);
-//   console.log(req);
-//   //constをtryの外に出したら動いた
-//   const { idOrName } = req.params;
-//   try {
-//     const {
-//       _id,
-//       name,
-//       category,
-//       url,
-//       evaluation,
-//       distributor,
-//       price,
-//       img,
-//       material,
-//       nutrition,
-//       description,
-//     } = req.body;
+exports.patchUser = async (req: Request, res: Response) => {
+  //constをtryの外に出したら動いた
+  const { id } = req.params;
+  try {
+    const {
+      _id,
+      user_name,
+      user_email,
+      user_password,
+      user_avatar,
+      target_language,
+      cards,
+    } = req.body;
 
-//     await userModel.updateOne(
-//       { _id: idOrName },
-//       {
-//         $set: {
-//           _id: _id,
-//           name: name,
-//           category: category,
-//           url: url,
-//           evaluation: evaluation,
-//           distributor: distributor,
-//           price,
-//           img: img,
-//           material: material,
-//           nutrition: nutrition,
-//           description: description,
-//         },
-//       }
-//     );
-//     const afterFood = await userModel.find({ name: name });
-//     res.send(afterFood);
-//   } catch (err) {
-//     res.send(err).status(404);
-//   }
-// };
+    await userModel.updateOne(
+      { _id: id },
+      {
+        $set: {
+          _id: _id,
+          user_name: user_name,
+          user_email: user_email,
+          user_password: user_password,
+          user_avatar: user_avatar,
+          target_language: target_language,
+          cards: cards,
+        },
+      }
+    );
+    const user = await userModel.find({ _id: id });
+    res.send(user);
+  } catch (err) {
+    res.send(err).status(404);
+  }
+};
 
 exports.deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
