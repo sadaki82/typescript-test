@@ -53,13 +53,13 @@ exports.patchUser = async (req: Request, res: Response) => {
       { _id: id },
       {
         $set: {
-          _id: _id,
-          user_name: user_name,
-          user_email: user_email,
-          user_password: user_password,
-          user_avatar: user_avatar,
-          target_language: target_language,
-          cards: cards,
+          _id,
+          user_name,
+          user_email,
+          user_password,
+          user_avatar,
+          target_language,
+          cards,
         },
       }
     );
