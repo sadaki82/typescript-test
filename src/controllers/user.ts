@@ -24,8 +24,8 @@ exports.getUser = async (req: Request, res: Response) => {
 };
 
 exports.postUser = async (req: Request, res: Response) => {
-  const user = new userModel(req.body);
-
+  const user = await new userModel(req.body);
+  console.log(user);
   try {
     await user.save();
     res.send(user);
@@ -83,7 +83,7 @@ exports.postUser = async (req: Request, res: Response) => {
 exports.deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    await userModel.remove({ _id: id });
+    await userModel.deleteOne({ _id: id });
     res.send("delete success");
   } catch (err) {
     res.send(err).status(404);

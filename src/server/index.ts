@@ -1,18 +1,20 @@
 const PORT = process.env.PORT || 8000;
 import express from "express";
 const app = express();
+require("dotenv").config();
 
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
+import bodyParser from "body-parser";
 app.use(bodyParser.json()); // application/json
 
-const cors = require("cors");
-require("dotenv").config();
+// const cors = require("cors");
+import cors from "cors";
 app.use(cors());
 
 const mongoose = require("mongoose");
-const foodRouter = require("../routes/routes");
+const Router = require("../routes/routes");
 
-app.use(foodRouter);
+app.use(Router);
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
