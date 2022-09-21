@@ -22,7 +22,7 @@ const Schema = mongoose.Schema;
 
 const UserToCardsSchema = new mongoose.Schema({
   uid: String,
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  // user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   flashcard_id: { type: mongoose.Schema.Types.ObjectId, ref: "Flashcard" },
   interval: Number,
   efactor: Number,

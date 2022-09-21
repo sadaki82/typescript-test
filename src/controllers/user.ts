@@ -23,47 +23,22 @@ exports.getUser = async (req: Request, res: Response) => {
   }
 };
 
-exports.postUser = async (req: Request, res: Response) => {
-  const user = await new userModel(req.body);
+exports.getUserByUid = async (req: Request, res: Response) => {
+  const { uid } = req.params;
+  const user = await userModel.find({ uuid: uid });
 
   try {
-    await user.save();
     res.send(user);
   } catch (err) {
-    // res.status(500).send(err);
     res.send(err).status(404);
   }
 };
 
-exports.patchUser = async (req: Request, res: Response) => {
-  //constをtryの外に出したら動いた
-  const { id } = req.params;
+exports.postUser = async (req: Request, res: Response) => {
+  const user = new userModel(req.body);
+  console.log(user);
   try {
-    const {
-      _id,
-      user_name,
-      user_email,
-      user_password,
-      user_avatar,
-      target_language,
-      cards,
-    } = req.body;
-
-    await userModel.updateOne(
-      { _id: id },
-      {
-        $set: {
-          _id,
-          user_name,
-          user_email,
-          user_password,
-          user_avatar,
-          target_language,
-          cards,
-        },
-      }
-    );
-    const user = await userModel.find({ _id: id });
+    await user.save();
     res.send(user);
   } catch (err) {
     res.send(err).status(404);
@@ -75,6 +50,20 @@ exports.deleteUser = async (req: Request, res: Response) => {
   try {
     await userModel.deleteOne({ _id: id });
     res.send("delete success");
+  } catch (err) {
+    res.send(err).status(404);
+  }
+};
+
+exports.patchUserByUid = async (req: Request, res: Response) => {
+  const uid = req.params.uid.trim();
+  const query = { uuid: uid };
+  const update = req.body;
+  try {
+    const updatedUser = await userModel.findOneAndUpdate(query, update, {
+      returnOriginal: false,
+    });
+    res.send(updatedUser);
   } catch (err) {
     res.send(err).status(404);
   }

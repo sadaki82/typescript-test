@@ -1,5 +1,6 @@
 const usertocardsModel = require("../models/users_to_cards");
 import express, { Request, Response } from "express";
+const mongoose = require("mongoose");
 
 exports.getUsersToCards = async (req: Request, res: Response) => {
   const users_to_cards = await usertocardsModel.find({});
@@ -71,11 +72,8 @@ exports.postUsersToCards = async (req: Request, res: Response) => {
 exports.patchUserToCardById = async (req: Request, res: Response) => {
   //constをtryの外に出したら動いた
   const id = req.params.id.trim();
-  console.log(id);
   const query = { _id: mongoose.Types.ObjectId(id) };
-  console.log(query);
   const update = req.body;
-  console.log(update);
   try {
     const updatedCard = await usertocardsModel.findOneAndUpdate(query, update, {
       returnOriginal: false,
@@ -86,45 +84,43 @@ exports.patchUserToCardById = async (req: Request, res: Response) => {
   }
 };
 
-exports.patchUserToCard = async (req: Request, res: Response) => {
-  const bodyArray = req.body;
-  console.log(bodyArray);
-  const result = [];
-  try {
-    for (let obj of bodyArray) {
-      console.log("single object", obj);
-      const id = obj._id.trim();
-      const query = { _id: mongoose.Types.ObjectId(id) };
-      const update = obj;
-      const updatedCard = await usertocardsModel.findOneAndUpdate(
-        query,
-        update,
-        { returnOriginal: false }
-      );
-      console.log("updated card", updatedCard);
-      result.push(updatedCard);
-    }
-    res.send(result);
-  } catch (err) {
-    res.send(err).status(404);
-  }
-};
-
-// exports.patchUserToCardByUid = async (req, res) => {
-//   const uid = req.params.uid.trim();
-//   const query = { uid: uid };
-//   const update = req.body;
+// exports.patchUserToCard = async (req, res) => {
+//   const bodyArray = req.body;
+//   console.log(bodyArray);
+//   const result = [];
 //   try {
-//    const updatedCard = await usertocardsModel.findOneAndUpdate(
-//       query,
-//       update,
-//       { returnOriginal: false }
-//     );
-//     res.send(updatedCard);
+//     for (let obj of bodyArray) {
+//       console.log("single object", obj);
+//       const id = obj._id.trim();
+//       const query = { _id: mongoose.Types.ObjectId(id) };
+//       const update = obj;
+//       const updatedCard = await usertocardsModel.findOneAndUpdate(
+//         query,
+//         update,
+//         { returnOriginal: false }
+//       );
+//       console.log("updated card", updatedCard);
+//       result.push(updatedCard);
+//     }
+//     res.send(result);
 //   } catch (err) {
 //     res.send(err).status(404);
 //   }
 // };
+
+exports.patchUserToCardByUid = async (req: Request, res: Response) => {
+  const uid = req.params.uid.trim();
+  const query = { uid: uid };
+  const update = req.body;
+  try {
+    const updatedCard = await usertocardsModel.findOneAndUpdate(query, update, {
+      returnOriginal: false,
+    });
+    res.send(updatedCard);
+  } catch (err) {
+    res.send(err).status(404);
+  }
+};
 
 exports.deleteUsersToCards = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -141,7 +137,8 @@ exports.getCardSchedule = async (req: Request, res: Response) => {
   const { id } = req.params;
   const user_to_card = await usertocardsModel.aggregate([
     {
-      $match: { user_id: mongoose.Types.ObjectId(id) },
+      $match: { _id: mongoose.Types.ObjectId(id) },
+      // $match: { _id: id },
     },
     {
       $lookup: {
@@ -152,7 +149,7 @@ exports.getCardSchedule = async (req: Request, res: Response) => {
       },
     },
   ]);
-  console.log(user_to_card);
+
   try {
     res.send(user_to_card);
   } catch (err) {
@@ -175,7 +172,7 @@ exports.getCardScheduleByUid = async (req: Request, res: Response) => {
       },
     },
   ]);
-  console.log(user_to_card);
+
   try {
     res.send(user_to_card);
   } catch (err) {
