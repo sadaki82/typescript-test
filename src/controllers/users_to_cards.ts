@@ -84,29 +84,29 @@ exports.patchUserToCardById = async (req: Request, res: Response) => {
   }
 };
 
-// exports.patchUserToCard = async (req, res) => {
-//   const bodyArray = req.body;
-//   console.log(bodyArray);
-//   const result = [];
-//   try {
-//     for (let obj of bodyArray) {
-//       console.log("single object", obj);
-//       const id = obj._id.trim();
-//       const query = { _id: mongoose.Types.ObjectId(id) };
-//       const update = obj;
-//       const updatedCard = await usertocardsModel.findOneAndUpdate(
-//         query,
-//         update,
-//         { returnOriginal: false }
-//       );
-//       console.log("updated card", updatedCard);
-//       result.push(updatedCard);
-//     }
-//     res.send(result);
-//   } catch (err) {
-//     res.send(err).status(404);
-//   }
-// };
+exports.patchUserToCard = async (req: Request, res: Response) => {
+  const bodyArray = req.body;
+  console.log(bodyArray);
+  const result = [];
+  try {
+    for (let obj of bodyArray) {
+      console.log("single object", obj);
+      const id = obj._id.trim();
+      const query = { _id: mongoose.Types.ObjectId(id) };
+      const update = obj;
+      const updatedCard = await usertocardsModel.findOneAndUpdate(
+        query,
+        update,
+        { returnOriginal: false }
+      );
+      console.log("updated card", updatedCard);
+      result.push(updatedCard);
+    }
+    res.send(result);
+  } catch (err) {
+    res.send(err).status(404);
+  }
+};
 
 exports.patchUserToCardByUid = async (req: Request, res: Response) => {
   const uid = req.params.uid.trim();

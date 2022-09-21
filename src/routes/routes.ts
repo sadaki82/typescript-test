@@ -20,7 +20,7 @@ app.delete("/api/flashcards/:id", flashcardController.deleteFlashcard);
 
 app.get("/api/userstocards", userstocardsController.getUsersToCards);
 app.patch("/api/userstocards/:id", userstocardsController.patchUserToCardById);
-// app.patch("/api/userstocards/", userstocardsController.patchUserToCard);
+app.patch("/api/userstocards/", userstocardsController.patchUserToCard);
 app.patch(
   "/api/userstocardsuid/:uid",
   userstocardsController.patchUserToCardByUid
