@@ -1,4 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+// const moment = require("moment-timezone");
+// const dateTokyo = moment.tz(Date.now(), "ASIA/Tokyo");
 
 const FlashcardSchema = new mongoose.Schema({
   target_word: String,
@@ -7,13 +9,13 @@ const FlashcardSchema = new mongoose.Schema({
   card_language: String,
   Eng_meaning: [],
   created_by: String,
-  created_timestamp: String,
+  created_timestamp: String, //string
   picture_url: String,
   flagged_inappropriate: Boolean,
   public: Boolean,
   haters: [],
   likers: [],
-  hashtags: [],
+  tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tag" }],
   flagging_users: [],
 });
 
