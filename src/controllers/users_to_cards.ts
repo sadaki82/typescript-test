@@ -108,19 +108,19 @@ exports.patchUserToCard = async (req: Request, res: Response) => {
   }
 };
 
-exports.patchUserToCardByUid = async (req: Request, res: Response) => {
-  const uid = req.params.uid.trim();
-  const query = { uid: uid };
-  const update = req.body;
-  try {
-    const updatedCard = await usertocardsModel.findOneAndUpdate(query, update, {
-      returnOriginal: false,
-    });
-    res.send(updatedCard);
-  } catch (err) {
-    res.send(err).status(404);
-  }
-};
+// exports.patchUserToCardByUid = async (req: Request, res: Response) => {
+//   const uid = req.params.uid.trim();
+//   const query = { uid: uid };
+//   const update = req.body;
+//   try {
+//     const updatedCard = await usertocardsModel.findOneAndUpdate(query, update, {
+//       returnOriginal: false,
+//     });
+//     res.send(updatedCard);
+//   } catch (err) {
+//     res.send(err).status(404);
+//   }
+// };
 
 exports.deleteUsersToCards = async (req: Request, res: Response) => {
   const { id } = req.params;
