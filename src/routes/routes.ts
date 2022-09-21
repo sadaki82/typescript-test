@@ -14,7 +14,7 @@ app.delete("/api/users/:id", userController.deleteUser);
 
 app.get("/api/flashcards", flashcardController.getFlashcards);
 app.get("/api/flashcards/:id", flashcardController.getFlashcard);
-// app.get("/api/flashcardsby/:uid", flashcardController.getFlashcardByCreate); //endpointをflashcards/:uidに変更したいが
+app.get("/api/flashcardsby/:uid", flashcardController.getFlashcardByCreate); //endpointをflashcards/:uidに変更したいが
 app.post("/api/flashcards", flashcardController.postFlashcard);
 app.delete("/api/flashcards/:id", flashcardController.deleteFlashcard);
 

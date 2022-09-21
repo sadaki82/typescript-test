@@ -22,16 +22,16 @@ exports.getFlashcard = async (req: Request, res: Response) => {
   }
 };
 
-// exports.getFlashcardByCreate = async (req, res) => {
-//   const { uid } = req.params;
-//   const flashcard = await flashcardModel.find({ created_by: uid });
+exports.getFlashcardByCreate = async (req: Request, res: Response) => {
+  const { uid } = req.params;
+  const flashcard = await flashcardModel.find({ created_by: uid });
 
-//   try {
-//     res.send(flashcard);
-//   } catch (err) {
-//     res.send(err).status(404);
-//   }
-// };
+  try {
+    res.send(flashcard);
+  } catch (err) {
+    res.send(err).status(404);
+  }
+};
 
 exports.postFlashcard = async (req: Request, res: Response) => {
   const flashcard = new flashcardModel(req.body);
