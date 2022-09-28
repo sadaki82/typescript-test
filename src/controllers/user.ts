@@ -1,6 +1,5 @@
 const userModel = require("../models/user");
 import express, { Request, Response } from "express";
-import mongoose from "mongoose";
 
 exports.getUsers = async (req: Request, res: Response) => {
   const users = await userModel.find({});
@@ -48,7 +47,7 @@ exports.postUser = async (req: Request, res: Response) => {
 exports.deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    await userModel.deleteOne({ _id: id });
+    await userModel.remove({ _id: id });
     res.send("delete success");
   } catch (err) {
     res.send(err).status(404);

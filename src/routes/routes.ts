@@ -7,24 +7,22 @@ const tagsController = require("../controllers/tag");
 
 app.get("/api/users", userController.getUsers);
 app.get("/api/users/:id", userController.getUser);
-app.get("/api/usersuid/:uid", userController.getUserByUid); //endpointをusers/:uidに変更したいが
+app.get("/api/usersuid/:uid", userController.getUserByUid);
 app.post("/api/users", userController.postUser);
 app.patch("/api/users/:uid", userController.patchUserByUid);
 app.delete("/api/users/:id", userController.deleteUser);
 
 app.get("/api/flashcards", flashcardController.getFlashcards);
 app.get("/api/flashcards/:id", flashcardController.getFlashcard);
-app.get("/api/flashcardsby/:uid", flashcardController.getFlashcardByCreate); //endpointをflashcards/:uidに変更したいが
+app.get("/api/flashcardsby/:uid", flashcardController.getFlashcardByCreate);
 app.post("/api/flashcards", flashcardController.postFlashcard);
+app.patch("/api/flashcards/:id", flashcardController.patchFlashcard);
 app.delete("/api/flashcards/:id", flashcardController.deleteFlashcard);
 
 app.get("/api/userstocards", userstocardsController.getUsersToCards);
 app.patch("/api/userstocards/:id", userstocardsController.patchUserToCardById);
 app.patch("/api/userstocards/", userstocardsController.patchUserToCard);
-app.patch(
-  "/api/userstocardsuid/:uid",
-  userstocardsController.patchUserToCardByUid
-);
+// app.patch("/api/userstocardsuid/:uid", userstocardsController.patchUserToCardByUid);
 app.post("/api/userstocards", userstocardsController.postUsersToCards);
 app.delete("/api/userstocards/:id", userstocardsController.deleteUsersToCards);
 

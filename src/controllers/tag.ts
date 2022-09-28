@@ -1,6 +1,8 @@
-const tagModel = require("../models/tag");
-import mongoose from "mongoose";
+const tagsController = require("../controllers/tag");
 import express, { Request, Response } from "express";
+
+const tagModel = require("../models/tag");
+const mongoose = require("mongoose");
 
 exports.getTags = async (req: Request, res: Response) => {
   const tags = await tagModel.find({});

@@ -1,4 +1,5 @@
 const flashcardModel = require("../models/flashcard");
+const mongoose = require("mongoose");
 import express, { Request, Response } from "express";
 
 exports.getFlashcards = async (req: Request, res: Response) => {
@@ -39,6 +40,25 @@ exports.postFlashcard = async (req: Request, res: Response) => {
   try {
     await flashcard.save();
     res.send(flashcard);
+  } catch (err) {
+    res.send(err).status(404);
+  }
+};
+
+exports.patchFlashcard = async (req: Request, res: Response) => {
+  //constをtryの外に出したら動いた
+  const id = req.params.id.trim();
+  const query = { _id: mongoose.Types.ObjectId(id) };
+  const update = req.body;
+  try {
+    const updatedFlashCard = await flashcardModel.findOneAndUpdate(
+      query,
+      update,
+      {
+        returnOriginal: false,
+      }
+    );
+    res.send(updatedFlashCard);
   } catch (err) {
     res.send(err).status(404);
   }

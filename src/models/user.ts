@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   uuid: String,
@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
   },
   save_new_card_to_deck: Boolean, //bool? (graemes mistake)
   ui_language: String,
-  dark_mode: String,
+  dark_mode: Boolean,
 });
 
 const User = mongoose.model("User", UserSchema);

@@ -1,6 +1,6 @@
+const mongoose = require("mongoose");
 const usertocardsModel = require("../models/users_to_cards");
 import express, { Request, Response } from "express";
-const mongoose = require("mongoose");
 
 exports.getUsersToCards = async (req: Request, res: Response) => {
   const users_to_cards = await usertocardsModel.find({});
@@ -108,14 +108,16 @@ exports.patchUserToCard = async (req: Request, res: Response) => {
   }
 };
 
-// exports.patchUserToCardByUid = async (req: Request, res: Response) => {
+// exports.patchUserToCardByUid = async (req, res) => {
 //   const uid = req.params.uid.trim();
 //   const query = { uid: uid };
 //   const update = req.body;
 //   try {
-//     const updatedCard = await usertocardsModel.findOneAndUpdate(query, update, {
-//       returnOriginal: false,
-//     });
+//    const updatedCard = await usertocardsModel.findOneAndUpdate(
+//       query,
+//       update,
+//       { returnOriginal: false }
+//     );
 //     res.send(updatedCard);
 //   } catch (err) {
 //     res.send(err).status(404);
@@ -137,8 +139,7 @@ exports.getCardSchedule = async (req: Request, res: Response) => {
   const { id } = req.params;
   const user_to_card = await usertocardsModel.aggregate([
     {
-      $match: { _id: mongoose.Types.ObjectId(id) },
-      // $match: { _id: id },
+      $match: { user_id: mongoose.Types.ObjectId(id) },
     },
     {
       $lookup: {
